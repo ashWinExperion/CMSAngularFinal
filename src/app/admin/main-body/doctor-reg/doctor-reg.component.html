@@ -1,0 +1,107 @@
+<h3 id='doctorHeader' class="">DOCTOR REGISTRATION</h3>
+<!-- <h3 id ='othersHeader' class="d-none">OTHERS REGISTRATION</h3> -->
+<form #docRegForm="ngForm" autocomplete="false" (ngSubmit)="onSubmit(docRegForm)">
+
+    <input [(ngModel)]="this.doctorSrvice.doctorRegFormData.Status" type="text" name="Status" id='status' class="d-none"
+        required>
+    <input autocomplete="false" [(ngModel)]="this.doctorSrvice.doctorRegFormData.UserId" type="text" name="UserId"
+        id='userId' class="d-none" placeholder="First name">
+    <input autocomplete="false" [(ngModel)]="this.doctorSrvice.doctorRegFormData.DoctorId" type="text" name="DoctorId"
+        id='doctorId' class="d-none" placeholder="First name">
+    <div class="row">
+        <div class="col">
+            <small>First Name</small>
+            <input autocomplete="false" #FirstName="ngModel" (change)="onChangeFn(FirstName.value)"
+                [(ngModel)]="this.doctorSrvice.doctorRegFormData.FirstName" name="FirstName" id='fname'
+                class="form-control" [ngClass]="{'is-invalid': FirstName.touched && FirstName.invalid }"
+                placeholder="First name">
+        </div>
+        <div class="col">
+            <small>Last Name</small>
+            <input autocomplete="false" #LastName="ngModel" pattern="[a-zA-Z ]*" (change)="onChangeFn($event)" required
+                [ngClass]="{'is-invalid': LastName.touched && LastName.invalid }"
+                [(ngModel)]="this.doctorSrvice.doctorRegFormData.LastName" type="text" name=LastName id='lname'
+                class="form-control" placeholder="Last name">
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 2%;">
+        <div class="col">
+            <small>DOB </small>
+            <input autocomplete="false" max="{{dateMax | date:'yyyy-MM-dd'}}" #DateOfBirth="ngModel"
+                (change)="OnDateChange(DateOfBirth.value)"
+                [ngClass]="{'is-invalid': DateOfBirth.touched && dateIsGreater}"
+                [(ngModel)]="this.doctorSrvice.doctorRegFormData.UserDob" type="date" name="UserDob" id='docDOB'
+                class="form-control" placeholder="DOB">
+        </div>
+        <div class="col">
+            <small>Phone No.</small>
+            <input #Phone="ngModel" pattern="[0-9 ]*" required
+                [ngClass]="{'is-invalid': Phone.touched && Phone.invalid }"
+                [(ngModel)]="this.doctorSrvice.doctorRegFormData.Phone" type="text" name="Phone" id='phone'
+                minlength="10" maxlength="10" class="form-control" placeholder="Phone">
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 2%;">
+
+        <div class="col">
+            <small style="width: 100%;">Location</small>
+            <div style="display: flex;">
+                <input required autocomplete="false" #City="ngModel"
+                    [ngClass]="{'is-invalid': City.touched && City.invalid }" pattern="[a-zA-Z ]*"
+                    [(ngModel)]="this.doctorSrvice.doctorRegFormData.City" type="text" name="City" class="form-control"
+                    placeholder="City">
+                <input required #State="ngModel" [ngClass]="{'is-invalid': State.touched && State.invalid }"
+                    [(ngModel)]="this.doctorSrvice.doctorRegFormData.State" pattern="[a-zA-Z ]*" type="text"
+                    name="State" class="form-control" placeholder="State">
+            </div>
+        </div>
+        <div class="col">
+            <small style="width: 100%;">Credentials</small>
+            <div style="display: flex;">
+                <input required autocomplete="false" minlength="5"
+                    [(ngModel)]="this.doctorSrvice.doctorRegFormData.UserName" type="text" name="UserName"
+                    class="form-control" placeholder="Username">
+                <input required autocomplete="false" [(ngModel)]="this.doctorSrvice.doctorRegFormData.Password"
+                    type="text" name="Password" class="form-control" placeholder="Password">
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 2%;">
+        <div class="col">
+            <small style="width: 100%;">Specialization</small>
+            <select #Special="ngModel" required
+                [ngClass]="{'is-invalid': (Special.touched && Special.invalid) ||( Special.touched && Special.value==0)}"
+                [(ngModel)]="this.doctorSrvice.doctorRegFormData.Specialization" class="form-control"
+                name="Specialization" id='DoctorSpecialization'>
+                <option value="0" selected>---Select SPECIALIZATION---</option>
+                <option *ngFor="let item of listSpecialization" value={{item.SpecializationId}}>
+                    {{item.SpecializationName}}</option>
+            </select>
+
+
+        </div>
+        <div class="col">
+            <small style="width: 100%;">Gender</small>
+            <div style="display: flex;">
+
+                <div style="padding-left: 5%;">
+                    <input required [(ngModel)]="this.doctorSrvice.doctorRegFormData.Gender" type="radio" name="Gender"
+                        value="Male">
+                    <label>Male</label><i class="bi bi-gender-male"></i>
+                </div>
+                <div style="padding-left: 5%;">
+                    <input required type="radio" name="Gender" [(ngModel)]="this.doctorSrvice.doctorRegFormData.Gender"
+                        value="Female">
+                    <label>Female</label><i class="bi bi-gender-female"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button style="float: right;margin-top: 5%;" type="submit"
+        class="btn btn-warning">Submit</button>
+
+</form>
