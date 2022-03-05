@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UsersService } from 'src/app/shared/users.service';
 
 @Component({
   selector: 'app-top-nav',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopNavComponent implements OnInit {
 
-  constructor() { }
+  nameUser="";
+  role=["","Admin","Doctor","Receptionist","Pharmacist","Lab Tech"];
+  roleId=0;
+  constructor(private user:UsersService) { }
 
   ngOnInit(): void {
+    sessionStorage.getItem("USERID");
+    this.user.getUserById(sessionStorage.getItem("USERID")).subscribe(result=>{
+      console.log(result);
+      this.nameUser=result.FirstName;
+      this.roleId=result.RoleId;
+    })
   }
 
 }

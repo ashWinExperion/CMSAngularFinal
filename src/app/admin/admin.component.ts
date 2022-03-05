@@ -18,6 +18,7 @@ export class AdminComponent implements OnInit {
   ];
   ngOnInit(): void {
     this.toasterServie.success('Admin Loged In', 'Successfully...!!!');
+
   }
 
   

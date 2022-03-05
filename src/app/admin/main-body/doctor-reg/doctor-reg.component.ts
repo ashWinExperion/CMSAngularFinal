@@ -98,6 +98,9 @@ export class DoctorRegComponent implements OnInit {
           this.toastrService.error('Username already exist..!!', 'Error');
           return 0;
         } else {
+          form.value.DoctorId=0;
+          form.value.UserId=0;
+          form.value.Status=0;
           this.doctorSrvice.addDoctor(form.value).subscribe((result) => {
             this.toastrService.success('Doctor Registered...!!!', 'Success');
             form.resetForm();

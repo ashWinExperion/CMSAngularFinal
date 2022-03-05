@@ -29,7 +29,6 @@ export class AppointmentsDocComponent implements OnInit {
   consult(appId)
   {
     this.router.navigate(["/doctor/consulting",appId]);
-    alert(appId);
   }
 
 }

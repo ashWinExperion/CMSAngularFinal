@@ -36,7 +36,6 @@ export class PatientsListComponent implements OnInit {
   consult(appId)
   {
     this.router.navigate(["/doctor/all-appointments",appId]);
-    alert(appId);
   }
 
 }

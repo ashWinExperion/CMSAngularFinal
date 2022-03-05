@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { DoctorService } from 'src/app/shared/doctor.service';
 
 @Component({
@@ -11,7 +12,8 @@ export class GeneralNotesComponent implements OnInit {
 
   appointmentId;
   constructor(private router:ActivatedRoute,
-    private doctorService:DoctorService) { }
+    private doctorService:DoctorService,
+    private toast:ToastrService) { }
 
   ngOnInit(): void {
     this.appointmentId=this.router.snapshot.params['appointmentId'];
@@ -24,6 +26,6 @@ export class GeneralNotesComponent implements OnInit {
       console.log(result);
     })
     console.log(generlNotesForm.value);
-
+    this.toast.success("Added","General Notes");
   }
 }

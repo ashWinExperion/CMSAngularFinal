@@ -55,7 +55,6 @@ export class MedicineComponent implements OnInit {
   remove(i,id)
   {
     this.medicineList.splice(i,1);
-    alert(id);
     this.medicineService.removeMedFromList(id).subscribe(result=>{
 
     })
@@ -77,6 +76,7 @@ export class MedicineComponent implements OnInit {
       this.medicineService.addPrescribedMed(form.value,this.router.snapshot.params["appointmentId"]).subscribe(
         result=>{
           console.log(result);
+          
           this.medicineList.push({index:result,name:form.value['medicineName'],doze:form.value.Doze,medId:form.value.MedicineId})
         }
       )
